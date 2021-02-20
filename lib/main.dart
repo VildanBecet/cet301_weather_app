@@ -283,11 +283,11 @@ Widget forecastElement(
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             Text(
-              'dusuk: ' + minTemperature.toString() + ' °C',
+              'Dusuk: ' + minTemperature.toString() + ' °C',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             Text(
-              'ruzgar: ' + wind.toString() + '',
+              'Ruzgar: ' + wind.toString() + '',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
           ],
