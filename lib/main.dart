@@ -16,6 +16,7 @@ class _WeatherAppState extends State<WeatherApp> {
   int temperature;
   var minTemperatureForecast = new List(7);
   var maxTemperatureForecast = new List(7);
+  var windForecast = new List(7);
   String location = 'Istanbul';
   int woeid = 2344116;
   String weather = 'snow';
@@ -51,7 +52,7 @@ class _WeatherAppState extends State<WeatherApp> {
     } catch (error) {
       setState(() {
         errorMessage =
-        "Sorry, we don't have data about this city. Try another one.";
+        "Maalesef bu sehir hakkında bir veriye sahip degiliz. Farkli bir yer ara.";
       });
     }
   }
@@ -84,6 +85,7 @@ class _WeatherAppState extends State<WeatherApp> {
       setState(() {
         minTemperatureForecast[i] = data["min_temp"].round();
         maxTemperatureForecast[i] = data["max_temp"].round();
+        windForecast[i] = data["wind_speed"].round();
         abbreviationForecast[i] = data["weather_state_abbr"];
       });
     }
@@ -199,7 +201,10 @@ class _WeatherAppState extends State<WeatherApp> {
                             i + 1,
                             abbreviationForecast[i],
                             minTemperatureForecast[i],
-                            maxTemperatureForecast[i]),
+                            maxTemperatureForecast[i],
+                            windForecast[i],
+                        ),
+
                     ],
                   ),
                 ),
@@ -214,7 +219,7 @@ class _WeatherAppState extends State<WeatherApp> {
                         style:
                         TextStyle(color: Colors.white, fontSize: 25),
                         decoration: InputDecoration(
-                          hintText: 'Search another location...',
+                          hintText: 'Farkli bir yer arayin...',
                           hintStyle: TextStyle(
                               color: Colors.white, fontSize: 18.0),
                           prefixIcon:
@@ -242,7 +247,7 @@ class _WeatherAppState extends State<WeatherApp> {
 }
 
 Widget forecastElement(
-    daysFromNow, abbreviation, minTemperature, maxTemperature) {
+    daysFromNow, abbreviation, minTemperature, maxTemperature, wind) {
   var now = new DateTime.now();
   var oneDayFromNow = now.add(new Duration(days: daysFromNow));
   return Padding(
@@ -274,11 +279,15 @@ Widget forecastElement(
               ),
             ),
             Text(
-              'High: ' + maxTemperature.toString() + ' °C',
+              'Yuksek: ' + maxTemperature.toString() + ' °C',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
             Text(
-              'Low: ' + minTemperature.toString() + ' °C',
+              'dusuk: ' + minTemperature.toString() + ' °C',
+              style: TextStyle(color: Colors.white, fontSize: 20.0),
+            ),
+            Text(
+              'ruzgar: ' + wind.toString() + '',
               style: TextStyle(color: Colors.white, fontSize: 20.0),
             ),
           ],
